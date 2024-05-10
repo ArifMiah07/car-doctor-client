@@ -9,7 +9,7 @@ const CheckOut = () => {
     const {user} = useContext(AuthContext);
 
     console.log(service);
-    const {title, _id, price} = service;
+    const {title, _id, price, img} = service;
 
 
     const handleOrderNow = (e)=>{
@@ -17,7 +17,7 @@ const CheckOut = () => {
 
         const form = e.target;
         const name = form.name.value;
-        const email = form.email.value;
+        const email = user?.email;
         const date = form.date.value;
         const price = form.price.value;
         const massage = form.massage.value;
@@ -29,11 +29,33 @@ const CheckOut = () => {
             date, 
             price,
             massage,
-            service: _id,
+            service: title,
+            service_id: _id,
+            img
 
         }
 
         console.log(bookOrderData);
+
+        fetch('http://localhost:5000/bookings',{
+            method: 'POST', 
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify(bookOrderData)
+        })
+        .then(res => res.json())
+        .then(data =>{
+            console.log(data);
+            if(data.insertedId){
+                alert('service book successfully!')
+                // form.reset();
+            }
+        })
+        .catch(error =>{
+            console.log(error)
+        })
+
     }
 
 
@@ -46,7 +68,7 @@ const CheckOut = () => {
                         <label className="label">
                             <span className="label-text">Name</span>
                         </label>
-                        <input name="first_name" defaultValue={user?.displayName} type="first_name" placeholder="First Name" className="input input-bordered" required />
+                        <input name="name" defaultValue={user?.displayName} type="text" placeholder="First Name" className="input input-bordered" required />
                     </div>
                     {/* <div className="form-control">
                         <label className="label">
