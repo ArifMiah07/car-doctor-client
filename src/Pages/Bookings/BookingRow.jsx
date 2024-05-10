@@ -1,4 +1,5 @@
 
+import PropTypes from 'prop-types';
 const BookingRow = ({booking, handleDelete,  handleBookingConfirm}) => {
     const {customerName, date, img, service, price, _id, status} = booking;
 
@@ -38,5 +39,10 @@ const BookingRow = ({booking, handleDelete,  handleBookingConfirm}) => {
         </tr>
     );
 };
+BookingRow.propTypes = {
+    booking: PropTypes.object, 
+    handleDelete: PropTypes.func,  
+    handleBookingConfirm: PropTypes.func
+}
 
 export default BookingRow;

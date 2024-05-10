@@ -10,7 +10,8 @@ const PrivateRoute = ({children}) => {
     const location = useLocation();
     console.log(location.pathname);
     if(loading){
-        return <span className="loading loading-spinner loading-lg"></span>
+        return <img className="w-full" src="https://www.dailyfreepsd.com/wp-content/uploads/2014/03/Moving-Car-Animation-Photoshop-PSD.gif" alt="" />
+        // <span className="loading loading-spinner loading-lg"></span>
     }
 
     if(user?.email){
